@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_mobile/core/utils/f_class.dart';
-import 'package:food_mobile/core/utils/size_config.dart';
+import 'package:hack_app/style/styles.dart';
+import 'package:hack_app/utils/size_config.dart';
 
-Widget FElevatedButton(BuildContext context, VoidCallback callback, String text) {
-  final theme = FClass().getFTheme(context);
+Widget dElevatedButton(VoidCallback callback, String text, Color color) {
   return Container(
     width: double.infinity,
-      //padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
       child: ElevatedButton(
-        child: Text(text),
+        child: Text(text.toUpperCase()),
         style: ElevatedButton.styleFrom(
-            primary: theme.primaryColor,
+            primary: color,
             elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(getProportionateScreenWidth(0))),
-            padding: EdgeInsets.symmetric(vertical: 9),
-            textStyle: theme.textTheme.headline6.copyWith(fontWeight: FontWeight.w500)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(getProportionateScreenWidth(50))),
+            padding: EdgeInsets.symmetric(vertical: 3),
+            textStyle: textStyle.copyWith(color: Colors.white, fontSize: getProportionateScreenWidth(17))),
         onPressed: callback
       ),
   );
