@@ -1,99 +1,155 @@
-import 'dart:io';
-import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_mobile/core/utils/colors.dart';
-import 'package:food_mobile/core/utils/f_class.dart';
-import 'package:food_mobile/core/utils/size_config.dart';
-import 'package:food_mobile/fake_datas/header_list.dart';
-import 'package:food_mobile/widgets/f_elevated_button.dart';
-import 'package:food_mobile/widgets/f_item_infos.dart';
-import 'package:food_mobile/widgets/f_loader.dart';
-import 'package:food_mobile/widgets/f_network_image.dart';
-import 'package:food_mobile/widgets/svg_image.dart';
+import 'package:hack_app/pages/doctor_details.dart';
+import 'package:hack_app/style/styles.dart';
+import 'package:hack_app/utils/size_config.dart';
+import 'package:hack_app/widgets/elevated_button.dart';
 
-class FCarousel extends StatefulWidget {
+class Carousel extends StatefulWidget {
   @override
-  _FCarouselState createState() => _FCarouselState();
+  _CarouselState createState() => _CarouselState();
 }
 
-class _FCarouselState extends State<FCarousel> {
+class _CarouselState extends State<Carousel> {
 
   var controller = PageController();
   var currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    final theme = FClass().getFTheme(context);
-    final size = FClass().getFSize(context);
     controller.addListener(() {
       setState(() {
         currentPage = controller.page.round();
       });
     });
     SizeConfig().init(context);
-    return _body(size.width, controller, theme);
+    return _body(controller);
   }
-  _body(double height, PageController controller, ThemeData theme) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      height: height/1.50,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: controller,
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              itemCount: headerList.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-
-                  },
-                  child: Stack(
+  _body(PageController controller) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: getProportionateScreenHeight(240),
+          child: PageView.builder(
+            controller: controller,
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => DoctorDetails()));},
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(
+                    getProportionateScreenWidth(15),
+                    getProportionateScreenHeight(5),
+                    getProportionateScreenWidth(15),
+                    getProportionateScreenWidth(0)
+                  ),
+                  height: getProportionateScreenHeight(240),
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(getProportionateScreenWidth(30)),
+                      color: Colors.white
+                  ),
+                  child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
-                        child: fNetworkImage(
-                          height: height/1.50,
-                          width: double.infinity,
-                          radius: getProportionateScreenWidth(20),
-                          imageUrl: headerList[index]["url"],
+                        padding: EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15), horizontal: getProportionateScreenWidth(20)),
+                        width: double.infinity,
+                        height: getProportionateScreenHeight(90),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(getProportionateScreenWidth(30)),
+                                topRight: Radius.circular(getProportionateScreenWidth(30))
+                            ),
+                            color: primaryColor
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Mes rendez-vous", style: TextStyle(color: Colors.white70, fontSize: getProportionateScreenWidth(18)),),
+                            SizedBox(height: getProportionateScreenHeight(5),),
+                            Row(
+                              children: [
+                                Icon(CupertinoIcons.clock_fill, color: Colors.white,),
+                                SizedBox(width: getProportionateScreenWidth(5),),
+                                Text("12 Jan 2020, 8am - 10am", style: textStyle.copyWith(color: Colors.white),)
+                              ],
+                            )
+                          ],
                         ),
                       ),
-                      Container(
-                        //margin: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
-                          alignment: Alignment.bottomCenter,
-                          child: ItemInfos(context: context, item: headerList[index])
+                      ListTile(
+                        contentPadding: EdgeInsets.all(getProportionateScreenWidth(15)),
+                        leading: Container(
+                          height: getProportionateScreenWidth(60),
+                          width: getProportionateScreenWidth(60),
+                          decoration: BoxDecoration(
+                              color: primaryColor,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/doctor.png",),
+                                  fit: BoxFit.cover
+                              )
+                              //borderRadius: BorderRadius.circular(getProportionateScreenWidth(22))
+                          ),
+                        ),
+                        title: Text(
+                          "Docteur\nKossi",
+                          style: textStyle,
+                          textAlign: TextAlign.start,
+                        ),
+                        trailing: Icon(CupertinoIcons.info),
                       ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(child: dElevatedButton(() {}, "ASSISTER", primaryColor)),
+                            SizedBox(width: getProportionateScreenWidth(10),),
+                            TextButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: primaryColor.withOpacity(0.1),
+                                    shadowColor: primaryColor.withOpacity(0.1),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(getProportionateScreenWidth(50))),
+                                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: getProportionateScreenWidth(20)),
+                                    textStyle: textStyle.copyWith(color: Colors.white, fontSize: getProportionateScreenWidth(17))
+                                ),
+                                onPressed: () {},
+                                child: Text("FERMER".toUpperCase(), style: textStyle.copyWith(color: primaryColor, fontSize: getProportionateScreenWidth(17)),)),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-          _indicators(theme)
-        ],
-      ),
+        ),
+        SizedBox(height: getProportionateScreenHeight(10),),
+        _indicators()
+      ],
     );
   }
 
-  _indicators(theme) {
+  _indicators() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List<Widget>.generate(headerList.length, (int index) {
+      children: List<Widget>.generate(3, (int index) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 200),
           height: (index == currentPage) ? 10: 8,
           width: (index == currentPage) ? 10: 8,
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+          margin: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(3)),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: (index == currentPage) ? theme.primaryColor:Colors.grey.withOpacity(0.4)
+            shape: BoxShape.circle,
+            color: (index == currentPage) ? primaryColor:Colors.grey.shade300
           ),
         );
       }),
