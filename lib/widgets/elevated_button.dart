@@ -7,7 +7,7 @@ Widget dElevatedButton(VoidCallback callback, String text, Color color) {
   return Container(
     width: double.infinity,
       child: ElevatedButton(
-        child: Text(text.toUpperCase()),
+        child: Text(text),
         style: ElevatedButton.styleFrom(
             primary: color,
             elevation: 0,
