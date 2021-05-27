@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_app/pages/group_chat.dart';
 import 'package:hack_app/style/styles.dart';
 import 'package:hack_app/utils/size_config.dart';
+import 'package:hack_app/widgets/carousel.dart';
 import 'package:hack_app/widgets/elevated_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,96 +18,112 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         actions: [
           CircleAvatar(
-            child: Text("s"),
-            backgroundColor: greyColor,
+            backgroundColor: primaryColor,
+            child: Center(
+              child: Icon(CupertinoIcons.person_alt, color: Colors.white,),
+            ),
           ),
           SizedBox(width: getProportionateScreenWidth(15),)
         ],
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+        physics: BouncingScrollPhysics(),
         children: [
-          Text("Salut", style: textStyle),
-          SizedBox(height: getProportionateScreenHeight(5),),
-          Text("Dr. Yovo", style: TextStyle(fontSize: getProportionateScreenWidth(33), fontWeight: FontWeight.bold),),
-
           Container(
-            margin: EdgeInsets.only(top: getProportionateScreenHeight(20)),
-            height: getProportionateScreenHeight(240),
-            alignment: Alignment.topCenter,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(getProportionateScreenWidth(30)),
-              color: Colors.white
-            ),
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15), horizontal: getProportionateScreenWidth(20)),
-                  width: double.infinity,
-                  height: getProportionateScreenHeight(90),
+            padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+            child: Text("Bonjour,", style: textStyle)
+          ),
+          SizedBox(height: getProportionateScreenHeight(5),),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+            child: Text("Rebecca", style: TextStyle(fontSize: getProportionateScreenWidth(33), fontWeight: FontWeight.bold),)
+          ),
+          Carousel(),
+          ListView.builder(
+            padding: EdgeInsets.only(
+              left: getProportionateScreenWidth(15),
+              right: getProportionateScreenWidth(15),
+              bottom: getProportionateScreenHeight(10),
+              top: getProportionateScreenHeight(5)),
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index) {
+              if(index == 0) {
+                return Container(
+                  margin: EdgeInsets.only(top: getProportionateScreenHeight(10)),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(getProportionateScreenWidth(30)),
-                      topRight: Radius.circular(getProportionateScreenWidth(30))
+                      borderRadius: BorderRadius.circular(getProportionateScreenWidth(30)),
+                      color: Colors.white,
+
+                  ),
+                  child: ListTile(
+                    onTap: () => Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => GroupChat())),
+                    contentPadding: EdgeInsets.all(getProportionateScreenWidth(15)),
+                    leading: Container(
+                      height: getProportionateScreenWidth(60),
+                      width: getProportionateScreenWidth(60),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/discussion.png",),
+                              fit: BoxFit.cover
+                          )
+                        //borderRadius: BorderRadius.circular(getProportionateScreenWidth(22))
+                      ),
                     ),
-                    color: primaryColor
+                    title: Text(
+                      "Mon Forum",
+                      style: textStyle,
+                      textAlign: TextAlign.start,
+                    ),
+                    subtitle: Text(
+                      "Cliquez pour demander",
+                      style: textStyle.copyWith(fontSize: getProportionateScreenWidth(17)),
+                      textAlign: TextAlign.start,
+                    ),
+                    trailing: Icon(CupertinoIcons.right_chevron),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Mes rendez-vous", style: TextStyle(color: Colors.white70, fontSize: getProportionateScreenWidth(18)),),
-                      SizedBox(height: getProportionateScreenHeight(5),),
-                      Row(
-                        children: [
-                          Icon(CupertinoIcons.clock_fill, color: Colors.white,),
-                          SizedBox(width: getProportionateScreenWidth(5),),
-                          Text("12 Jan 2020, 8am - 10am", style: textStyle.copyWith(color: Colors.white),)
-                        ],
-                      )
-                    ],
-                  ),
+                );
+              }
+              return Container(
+                margin: EdgeInsets.only(top: getProportionateScreenHeight(10)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(getProportionateScreenWidth(30)),
+                  color: Colors.white
                 ),
-                ListTile(
+                child: ListTile(
+                  onTap: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => GroupChat())),
                   contentPadding: EdgeInsets.all(getProportionateScreenWidth(15)),
                   leading: Container(
                     height: getProportionateScreenWidth(60),
                     width: getProportionateScreenWidth(60),
                     decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(getProportionateScreenWidth(22))
+                        color: primaryColor,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/doctor.png",),
+                            fit: BoxFit.cover
+                        )
+                        //borderRadius: BorderRadius.circular(getProportionateScreenWidth(22))
                     ),
                   ),
                   title: Text(
-                    "Louis\nPatterson",
+                    "Docteur $index",
                     style: textStyle,
                     textAlign: TextAlign.start,
                   ),
-                  trailing: Icon(CupertinoIcons.info),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(child: dElevatedButton(() {}, "Accepter", primaryColor)),
-                      SizedBox(width: getProportionateScreenWidth(10),),
-                      TextButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: primaryColor.withOpacity(0.1),
-                          shadowColor: primaryColor.withOpacity(0.1),
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(getProportionateScreenWidth(50))),
-                          padding: EdgeInsets.symmetric(vertical: 3, horizontal: getProportionateScreenWidth(20)),
-                          textStyle: textStyle.copyWith(color: Colors.white, fontSize: getProportionateScreenWidth(17))
-                        ),
-                        onPressed: () {},
-                        child: Text("Annuler".toUpperCase(), style: textStyle.copyWith(color: primaryColor, fontSize: getProportionateScreenWidth(17)),)),
-                    ],
+                  subtitle: Text(
+                    "Spécialité $index",
+                    style: textStyle.copyWith(fontSize: getProportionateScreenWidth(17)),
+                    textAlign: TextAlign.start,
                   ),
-                )
-              ],
-            ),
+                  trailing: Icon(CupertinoIcons.right_chevron),
+                ),
+              );
+            }
           )
         ],
       ),
