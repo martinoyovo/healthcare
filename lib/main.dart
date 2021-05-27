@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hack_app/pages/auth/phone_auth.dart';
+import 'package:hack_app/pages/doctor_details.dart';
+import 'package:hack_app/pages/group_chat.dart';
 import 'package:hack_app/pages/home_page.dart';
 import 'package:hack_app/style/styles.dart';
 import 'package:hack_app/utils/validators.dart';
@@ -17,8 +20,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "GTWalsheimPro",
         primaryColor: primaryColor,
+        accentColor: primaryColor,
       ),
-      home: HomePage()
+      initialRoute: PhoneAuth.routeName,
+      routes: {
+        PhoneAuth.routeName:(context) => PhoneAuth(),
+        HomePage.routeName:(context) => HomePage(),
+        GroupChat.routeName:(context) => GroupChat(),
+        DoctorDetails.routeName:(context) => DoctorDetails(),
+      },
     );
   }
 }
