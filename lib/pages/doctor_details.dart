@@ -28,9 +28,9 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Docteur Kossi", style: textStyle.copyWith(fontSize: getProportionateScreenWidth(30), fontWeight: FontWeight.bold),),
+                  Text("Dr Kossi YOVO", style: textStyle.copyWith(fontSize: getProportionateScreenWidth(30), fontWeight: FontWeight.bold),),
                   SizedBox(height: getProportionateScreenWidth(10),),
-                  Text("Généraliste", style: textStyle,),
+                  Text("Cardiologue", style: textStyle,),
                   Row(
                     children: [
                       Text("Experience: ", style: textStyle.copyWith(),),
@@ -53,8 +53,11 @@ class _DoctorDetailsState extends State<DoctorDetails> {
             ],
           ),
           SizedBox(height: getProportionateScreenWidth(40),),
+          Text("Situation géographique de la clinique", style: textStyle.copyWith(fontSize: getProportionateScreenWidth(22), fontWeight: FontWeight.bold),),
+          Text("Commune Golfe 3, Rue des Champions, Maison N° 485, en face du supermarché LES EPERVIERS.\nContact : 22 22 22 22.", style: textStyle, textAlign: TextAlign.start,),
+          SizedBox(height: getProportionateScreenWidth(20),),
           Text("A propos", style: textStyle.copyWith(fontSize: getProportionateScreenWidth(22), fontWeight: FontWeight.bold),),
-          Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", style: textStyle, textAlign: TextAlign.start,),
+          Text("Docteur Kossi YOVO est un médecin cardiologue avec plus de 15 ans d’expérience, responsable de la clinique LA RAISON DU CŒUR. Il a pratiqué respectivement au CHU Sylvanus Olympio et Campus et à la Clinique BIASA.", style: textStyle, textAlign: TextAlign.start,),
           SizedBox(height: getProportionateScreenWidth(25),),
 
           Row(
