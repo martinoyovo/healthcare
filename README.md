@@ -1,4 +1,4 @@
-# This project is a Flutter project presented on a Hackathon, it's name is Dogda
+# This project is a Flutter project presented on a Hackathon, it's name is Dogda.
 
 
 ## You can find useful basics codebase in this repo.
