@@ -2,23 +2,26 @@ List<Map<String, dynamic>> groupChatDatas = [
   {
     "id": 1,
     "text":
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-    "from": {"id": 5, "name": "Docteur Yovo", "field": "Psychologie"},
-    "date": "12/25/2020"
+        "Bonjour à tous, \nDepuis 2 jours, je ressens une forte migraine. Est-ce que ça peut être le coronavirus ? ou c’est juste un début de palu svp ?",
+    "from": {"id": 4, "name": "", "field": "Psychologie"},
+    "date": "12/07/2020"
   },
   {
     "id": 2,
     "text":
-        "took a galley of type and scrambled it to make a type specimen book. It has survived not only",
-    "from": {"id": 5, "name": "Docteur Yovo", "field": "Psychologie"},
-    "date": "12/5/2020"
+        "Docteur A Bonjour Madame X, nous ne saurions dire avec exactitude de quoi vous souffrez au prime abord comme cela.\n"
+            "Dites-nous, cela vous arrive-t-il souvent ?\nSuivez-vous un traitement particulier ?",
+    "from": {"id": 5, "name": "Docteur A", "field": "Psychologie"},
+    "date": "12/28/2020"
   },
   {
     "id": 3,
-    "text": "five centuries, but also the leap into electronic",
-    "from": {"id": 4, "name": "Docteur Yovo", "field": "Psychologie"},
-    "date": "2/6/2021"
-  },
+    "text": "Une migraine peut cacher beaucoup de choses : le paludisme, l’hépatite B, "
+  "le diabète… Je vous recommande, en dehors des réponses de mes collègues, "
+        "de prendre un RDV pour le centre de santé le plus proche de vous dans votre commune.",
+    "from": {"id": 5, "name": "Docteur B", "field": "Psychologie"},
+    "date": "01/05/2021"
+  },/*
   {
     "id": 4,
     "text": "It was popularised in the 1960s with the release",
@@ -130,5 +133,5 @@ List<Map<String, dynamic>> groupChatDatas = [
     "text": "There are many variations of passages of Lorem Ipsum available",
     "from": {"id": 4, "name": "Docteur Yovo", "field": "Psychologie"},
     "date": "6/30/2020"
-  }
+  }*/
 ];
