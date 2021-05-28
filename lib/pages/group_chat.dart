@@ -52,7 +52,7 @@ class _GroupChatState extends State<GroupChat> {
                     crossAxisAlignment: patientId == chatData["from"]["id"] ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                     children: [
                       Text(
-                        chatData["date"].toString(),
+                        "${chatData["date"].toString()} - ${chatData["from"]["name"]}",
                       ),
                       Container(
                         //alignment: patientId == chatData["from"]["id"] ? Alignment.centerRight:Alignment.centerLeft,
